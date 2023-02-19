@@ -10,7 +10,10 @@ const Routes = () => {
         <Route path="/card-list" element={<CardListPage />} />
         <Route path="/card-name-input" element={<InputCardNamePage />} />
         <Route path="/card-registration" element={<RegistrationCardPage />} />
-        <Route path="*" element={<Navigate replace to="/card-list" />} />
+        <Route
+          path="*"
+          element={<Navigate replace to="/card-registration" />}
+        />
       </Route>
     </ReactRouterRoutes>
   );
