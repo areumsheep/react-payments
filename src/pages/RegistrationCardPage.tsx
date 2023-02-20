@@ -126,6 +126,7 @@ const RegistrationCardPage = () => {
       password: passwords.join(''),
     };
     setLocalStorageItem('CardValues', cardValues);
+    push('/card-name-input');
   };
 
   return (
