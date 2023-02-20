@@ -41,6 +41,15 @@ const RegistrationCardPage = () => {
     changeCardInfo({ holderName: value });
   };
 
+  const isSubmitEnabled = useMemo(() => {
+    if (holderName && number && expiration && cvc) {
+      if (passwords[0] && passwords[1] && passwords[2] && passwords[3]) {
+        return true;
+      }
+    }
+    return false;
+  }, [holderName, number, expiration, cvc, passwords]);
+
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     setHolderName(value);
@@ -105,6 +114,11 @@ const RegistrationCardPage = () => {
     let copyPassword = [...passwords];
     copyPassword[Number(name) - 1] = value;
     setPasswords(copyPassword);
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    console.log(holderName);
   };
 
   return (
