@@ -82,10 +82,17 @@ const RegistrationCardPage = () => {
     setLocalStorageItem('CardValues', card);
     push('/card-name-input');
   };
+
   const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     const formattedValue = formatMMYY(value);
     setExpiration(formattedValue);
+  };
+
+  const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    const sanitizedValue = value.replace(/[^0-9]/g, '');
+    setCvc(sanitizedValue);
   };
 
   return (
