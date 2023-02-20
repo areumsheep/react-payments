@@ -41,6 +41,11 @@ const RegistrationCardPage = () => {
     changeCardInfo({ holderName: value });
   };
 
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    setHolderName(value);
+  };
+
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     const formattedValue = formatCardNumber(value);
