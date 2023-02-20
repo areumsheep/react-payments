@@ -77,6 +77,11 @@ const RegistrationCardPage = () => {
     setLocalStorageItem('CardValues', card);
     push('/card-name-input');
   };
+  const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    const formattedValue = formatMMYY(value);
+    setExpiration(formattedValue);
+  };
 
   return (
     <>
