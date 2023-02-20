@@ -118,7 +118,14 @@ const RegistrationCardPage = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(holderName);
+    const cardValues = {
+      holderName,
+      number,
+      expiration,
+      cvc,
+      password: passwords.join(''),
+    };
+    setLocalStorageItem('CardValues', cardValues);
   };
 
   return (
