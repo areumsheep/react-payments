@@ -95,6 +95,18 @@ const RegistrationCardPage = () => {
     setCvc(sanitizedValue);
   };
 
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const regex = /[0-9]/g;
+    const target = e.target as HTMLInputElement;
+    const { value } = target;
+    const { name } = target;
+
+    if (!regex.test(value) || !name) return;
+    let copyPassword = [...passwords];
+    copyPassword[Number(name) - 1] = value;
+    setPasswords(copyPassword);
+  };
+
   return (
     <>
       <Header showBackIcon>카드 추가</Header>
