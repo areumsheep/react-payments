@@ -107,11 +107,12 @@ const RegistrationCardPage = () => {
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regex = /[0-9]/g;
     const target = e.target as HTMLInputElement;
-    const { value, name } = target;
+    const { value } = target;
+    const { id } = target.dataset;
 
-    if (!regex.test(value) || !name) return;
+    if (!regex.test(value) || !id) return;
     let copyPassword = [...passwords];
-    copyPassword[Number(name) - 1] = value;
+    copyPassword[Number(id) - 1] = value;
     setPasswords(copyPassword);
   };
 
