@@ -116,7 +116,7 @@ const RegistrationCardPage = () => {
     setPasswords(copyPassword);
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const cardValues = {
       holderName,
