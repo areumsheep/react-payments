@@ -42,7 +42,10 @@ const RegistrationCardPage = () => {
   };
 
   const isSubmitEnabled = useMemo(() => {
-    return isObjectComplete<CreditCardType>(card);
+    return (
+      isObjectComplete<CreditCardType>(card) &&
+      isValidCardLength() === 'success'
+    );
   }, [{ ...card }]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
