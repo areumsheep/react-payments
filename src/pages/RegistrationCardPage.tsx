@@ -42,17 +42,12 @@ const RegistrationCardPage = () => {
   };
 
   const isSubmitEnabled = useMemo(() => {
-    if (holderName && number && expiration && cvc) {
-      if (passwords[0] && passwords[1] && passwords[2] && passwords[3]) {
-        return true;
-      }
-    }
-    return false;
-  }, [holderName, number, expiration, cvc, passwords]);
+    return isObjectComplete<CreditCardType>(card);
+  }, [{ ...card }]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
-    setHolderName(value);
+    changeCardInfo({ holderName: value });
   };
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,13 +90,13 @@ const RegistrationCardPage = () => {
   const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     const formattedValue = formatMMYY(value);
-    setExpiration(formattedValue);
+    changeCardInfo({ expiration: formattedValue });
   };
 
   const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
-    const sanitizedValue = value.replace(/[^0-9]/g, '');
-    setCvc(sanitizedValue);
+    const formattedValue = value.replace(/[^0-9]/g, '');
+    changeCardInfo({ cvc: formattedValue });
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,21 +106,14 @@ const RegistrationCardPage = () => {
     const { id } = target.dataset;
 
     if (!regex.test(value) || !id) return;
-    let copyPassword = [...passwords];
-    copyPassword[Number(id) - 1] = value;
-    setPasswords(copyPassword);
+    const newPassword = [...card.password];
+    newPassword[Number(id) - 1] = value;
+    changeCardInfo({ password: [...newPassword] });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const cardValues = {
-      holderName,
-      number,
-      expiration,
-      cvc,
-      password: passwords.join(''),
-    };
-    setLocalStorageItem('CardValues', cardValues);
+    setLocalStorageItem('CardValues', card);
     push('/card-name-input');
   };
 
