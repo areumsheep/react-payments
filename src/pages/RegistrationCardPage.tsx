@@ -72,6 +72,10 @@ const RegistrationCardPage = () => {
     changeCardInfo({ password: [...newPassword] });
   };
 
+  // const onChange = (e: any) => {
+  //   console.log(e);
+  // };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLocalStorageItem('CardValues', card);
