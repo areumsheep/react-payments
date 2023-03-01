@@ -42,10 +42,7 @@ const RegistrationCardPage = () => {
   };
 
   const isSubmitEnabled = useMemo(() => {
-    return (
-      isObjectComplete<CreditCardType>(card) &&
-      isValidCardLength() === 'success'
-    );
+    return isObjectComplete<CreditCardType>(card) && !isInvalidCardLength();
   }, [{ ...card }]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,6 +80,10 @@ const RegistrationCardPage = () => {
     newPassword[Number(id) - 1] = value;
     changeCardInfo({ password: [...newPassword] });
   };
+
+  // const onChange = (e: any) => {
+  //   console.log(e);
+  // };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
