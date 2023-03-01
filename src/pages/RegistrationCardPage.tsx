@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import styled from '@emotion/styled';
 
 import { CreditCard, SelectCompany } from 'components';
