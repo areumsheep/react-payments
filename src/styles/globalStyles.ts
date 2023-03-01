@@ -2,10 +2,6 @@ import { css } from '@emotion/react';
 import './utils.css';
 
 export const globalStyles = css`
-  :root {
-    --mobile-width: 375px;
-  }
-
   body,
   h1,
   h2,

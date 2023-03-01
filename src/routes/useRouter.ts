@@ -16,9 +16,6 @@ const useRouter = () => {
           pathname: path,
         });
       },
-      replace(path: RoutePath) {
-        navigate(path, { replace: true });
-      },
     };
   }, [navigate]);
 };

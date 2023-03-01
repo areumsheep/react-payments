@@ -13,10 +13,9 @@ export const TextField = styled.input<TextFieldProps>`
     color: ${({ theme }) => theme.color.gray05};
   }
 
-  ${({ theme, validationStatus }) =>
+  ${({ validationStatus }) =>
     validationStatus === 'error' &&
     css`
-      background-color: ${theme.color.red00};
-      outline: 1px solid ${theme.color.red06};
+      outline: 1px solid red;
     `}
 `;

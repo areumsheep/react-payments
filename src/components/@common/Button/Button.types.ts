@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
-import type { ThemeKeys } from 'styles/theme';
+import { theme } from 'styles/theme';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: ThemeKeys;
+  color?: keyof typeof theme.color;
 }

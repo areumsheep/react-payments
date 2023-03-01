@@ -1,6 +1,4 @@
-import { useId } from 'react';
-
-import useToggle from 'hooks/useToggle';
+import { useId, useRef, useState } from 'react';
 
 import TooltipPortal from './TooltipPortal';
 import type { TooltipProps } from './Tooltip.types';
@@ -8,17 +6,24 @@ import * as Styled from './Tooltip.styled';
 
 const Tooltip = ({ children, content }: TooltipProps) => {
   const id = useId();
-  const { isOpened, setToggleOpen, setToggleClose } = useToggle();
+  const [show, setShow] = useState<boolean>(false);
+
+  const handleMouseOver = () => {
+    setShow(true);
+  };
+  const handleMouseOut = () => {
+    setShow(false);
+  };
 
   return (
     <Styled.Tooltip
       id={id}
-      onMouseOver={setToggleOpen}
-      onMouseLeave={setToggleClose}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseOut}
     >
       {children}
 
-      {isOpened && (
+      {show && (
         <TooltipPortal id={id}>
           <Styled.Content>{content}</Styled.Content>
         </TooltipPortal>
