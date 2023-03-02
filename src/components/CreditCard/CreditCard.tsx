@@ -1,6 +1,7 @@
 import * as Styled from './CreditCard.styles';
 import type { CreditCardProps } from './CreditCard.types';
 
+import { CardCompanies } from 'constants/Card';
 import { maskLastEight } from 'utils/format';
 import { findCardDefaultName } from 'utils/findCardDefaultName';
 
