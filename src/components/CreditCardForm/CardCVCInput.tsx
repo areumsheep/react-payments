@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { TextField, FormFieldControl } from 'components/@common';
 
 import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
@@ -9,19 +8,11 @@ import { validateCVC } from 'utils/inputValidation';
 import useInput from 'hooks/useInput';
 
 const CardCVCInput = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
   const { value, error, isInvalid, handle } = useInput(
     '',
     validateCVC,
     formatNumber
   );
-
-  const handleCVC = () => {
-    if (!inputRef.current) return;
-    const { value } = inputRef.current;
-    const formattedValue = value.replace(/[^0-9]/g, '');
-    inputRef.current.value = formattedValue;
-  };
 
   return (
     <FormFieldControl>
