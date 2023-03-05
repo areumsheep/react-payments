@@ -1,26 +1,15 @@
-import { useMemo, useRef, useState } from 'react';
 import { TextField, FormFieldControl } from 'components/@common';
 import { formatCardNumber } from 'utils/format';
 import { validateCardNumber } from 'utils/inputValidation';
 
+import useInput from 'hooks/useInput';
+
 const CardNumberInput = () => {
-  const [cardNumber, setCardNumber] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const isInvalid = useMemo(() => {
-    return errorMessage !== '';
-  }, [errorMessage]);
-
-  const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    const formatted = formatCardNumber(value);
-    const [status, message] = validateCardNumber(value);
-
-    if (status) {
-      setCardNumber(formatted);
-    }
-    setErrorMessage(message);
-  };
+  const { value, error, isInvalid, handle } = useInput(
+    '',
+    validateCardNumber,
+    formatCardNumber
+  );
 
   return (
     <FormFieldControl>
@@ -29,14 +18,14 @@ const CardNumberInput = () => {
         placeholder="0000-0000-0000-0000"
         type="text"
         inputMode="numeric"
-        value={cardNumber}
-        onChange={handleNumber}
+        value={value}
+        onChange={handle}
         validationStatus={isInvalid ? 'error' : 'success'}
         className="w-100"
       />
       {isInvalid && (
         <FormFieldControl.Description isError>
-          {errorMessage}
+          {error}
         </FormFieldControl.Description>
       )}
     </FormFieldControl>

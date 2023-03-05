@@ -1,27 +1,31 @@
-import { useRef } from 'react';
 import { TextField, FormFieldControl } from 'components/@common';
 import { formatMMYY } from 'utils/format';
+import { validateExpiration } from 'utils/inputValidation';
+
+import useInput from 'hooks/useInput';
 
 const CardExpirationInput = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleExpiration = () => {
-    if (!inputRef.current) return;
-    const { value } = inputRef.current;
-    const formattedValue = formatMMYY(value);
-    inputRef.current.value = formattedValue;
-  };
+  const { value, error, isInvalid, handle } = useInput(
+    '',
+    validateExpiration,
+    formatMMYY
+  );
 
   return (
     <FormFieldControl>
       <FormFieldControl.Label>만료일</FormFieldControl.Label>
       <TextField
         placeholder="MM / YY"
-        maxLength={5}
-        ref={inputRef}
-        onChange={handleExpiration}
+        value={value}
+        onChange={handle}
+        validationStatus={isInvalid ? 'error' : 'success'}
         className="w-30"
       />
+      {isInvalid && (
+        <FormFieldControl.Description isError>
+          {error}
+        </FormFieldControl.Description>
+      )}
     </FormFieldControl>
   );
 };
