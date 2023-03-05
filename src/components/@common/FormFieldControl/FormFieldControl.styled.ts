@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import type { DescriptionProps } from './FormFieldControl.types';
 
 export const Fieldset = styled.fieldset`
-  margin: 20px 0;
+  height: 90px;
 `;
 
 export const Label = styled.label`
