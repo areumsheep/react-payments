@@ -39,3 +39,10 @@ export const validateCVC = (target: string) => {
     '보안 코드는 3자 모두 입력되어야 합니다.'
   )(target);
 };
+
+export const validatePassword = (target: string) => {
+  return validate(
+    [maxLength(3)],
+    '비밀번호는 4자 모두 입력되어야 합니다.'
+  )(target);
+};
