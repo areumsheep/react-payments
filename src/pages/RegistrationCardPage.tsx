@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 
-import { CreditCard, SelectCompany } from 'components';
 import {
   Box,
   Header,
@@ -11,6 +10,8 @@ import {
   Chip,
   Modal,
 } from 'components/@common';
+import { CreditCard, SelectCompany } from 'components';
+import { CardNumberInput } from 'components/CreditCardForm';
 
 import useCardData from 'hooks/useCardData';
 import useRouter from 'routes/useRouter';
@@ -100,24 +101,7 @@ const RegistrationCardPage = () => {
       </ChipWrapper>
 
       <Form onSubmit={onSubmit}>
-        <FormFieldControl>
-          <FormFieldControl.Label>카드 번호</FormFieldControl.Label>
-          <TextField
-            placeholder="0000-0000-0000-0000"
-            type="text"
-            inputMode="numeric"
-            maxLength={19}
-            validationStatus={isInvalidCardLength() ? 'error' : 'success'}
-            value={card?.number}
-            onChange={handleNumber}
-            className="w-100"
-          />
-          {isInvalidCardLength() && (
-            <FormFieldControl.Description isError={isInvalidCardLength()}>
-              카드 번호는 16자 모두 입력되어야 합니다.
-            </FormFieldControl.Description>
-          )}
-        </FormFieldControl>
+        <CardNumberInput />
 
         <FormFieldControl>
           <FormFieldControl.Label>만료일</FormFieldControl.Label>
@@ -226,7 +210,7 @@ const RegistrationCardPage = () => {
 export default RegistrationCardPage;
 
 const Form = styled.form`
-  margin: 30px;
+  margin: 10px 30px;
 `;
 const ChipWrapper = styled(Box)`
   margin: 10px 0;
