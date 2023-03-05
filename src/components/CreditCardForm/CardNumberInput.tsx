@@ -4,7 +4,6 @@ import { formatCardNumber } from 'utils/format';
 import { validateCardNumber } from 'utils/inputValidation';
 
 const CardNumberInput = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
   const [cardNumber, setCardNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -30,7 +29,6 @@ const CardNumberInput = () => {
         placeholder="0000-0000-0000-0000"
         type="text"
         inputMode="numeric"
-        ref={inputRef}
         value={cardNumber}
         onChange={handleNumber}
         validationStatus={isInvalid ? 'error' : 'success'}
