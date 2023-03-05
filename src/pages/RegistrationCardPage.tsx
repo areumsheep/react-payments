@@ -1,26 +1,22 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import styled from '@emotion/styled';
 
-import {
-  Box,
-  Header,
-  TextField,
-  FormFieldControl,
-  Button,
-  Chip,
-  Modal,
-} from 'components/@common';
+import { Box, Header, Button, Chip, Modal } from 'components/@common';
 import { CreditCard, SelectCompany } from 'components';
-import { CardNumberInput } from 'components/CreditCardForm';
+import {
+  CardNumberInput,
+  CardExpirationInput,
+  CardHolderNameInput,
+  CardCVCInput,
+  CardPasswordInput,
+} from 'components/CreditCardForm';
 
 import useCardData from 'hooks/useCardData';
 import useRouter from 'routes/useRouter';
 
 import { isObjectComplete } from 'utils/validation';
-import { formatCardNumber, formatMMYY } from 'utils/format';
 import { setLocalStorageItem } from 'utils/localStorage';
 
-import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
 import type { CreditCardType } from 'types/CreditCard';
 
 const CARD_LENGTH = 19;
@@ -36,42 +32,6 @@ const RegistrationCardPage = () => {
   const isSubmitEnabled = useMemo(() => {
     return isObjectComplete<CreditCardType>(card) && !isInvalidCardLength();
   }, [{ ...card }]);
-
-  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    changeCardInfo({ holderName: value });
-  };
-
-  const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    const formattedValue = formatCardNumber(value);
-
-    changeCardInfo({ number: formattedValue });
-  };
-
-  const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    const formattedValue = formatMMYY(value);
-    changeCardInfo({ expiration: formattedValue });
-  };
-
-  const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    const formattedValue = value.replace(/[^0-9]/g, '');
-    changeCardInfo({ cvc: formattedValue });
-  };
-
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const regex = /[0-9]/g;
-    const target = e.target as HTMLInputElement;
-    const { value } = target;
-    const { id } = target.dataset;
-
-    if (!regex.test(value) || !id) return;
-    const newPassword = [...card.password];
-    newPassword[Number(id) - 1] = value;
-    changeCardInfo({ password: [...newPassword] });
-  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -103,99 +63,13 @@ const RegistrationCardPage = () => {
       <Form onSubmit={onSubmit}>
         <CardNumberInput />
 
-        <FormFieldControl>
-          <FormFieldControl.Label>만료일</FormFieldControl.Label>
-          <TextField
-            placeholder="MM / YY"
-            maxLength={5}
-            value={card?.expiration}
-            onChange={handleExpiration}
-            className="w-30"
-          />
-        </FormFieldControl>
+        <CardExpirationInput />
 
-        <FormFieldControl>
-          <Box display="flex" justifyContent="space-between">
-            <FormFieldControl.Label>
-              카드 소유자 이름 (선택)
-            </FormFieldControl.Label>
-            <FormFieldControl.Label>
-              {card?.holderName?.length}/30
-            </FormFieldControl.Label>
-          </Box>
-          <TextField
-            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            maxLength={30}
-            value={card?.holderName}
-            onChange={handleName}
-            className="w-100"
-          />
-        </FormFieldControl>
+        <CardHolderNameInput />
 
-        <FormFieldControl>
-          <FormFieldControl.Label
-            help={
-              <>
-                <p>카드 뒷면의 서명란 카드번호 중</p>
-                <p>맨 뒤 3자리 숫자를 입력해주세요.</p>
-                <CVCIcon />
-              </>
-            }
-          >
-            보안 코드 (CVC/CVV)
-          </FormFieldControl.Label>
-          <TextField
-            type="password"
-            inputMode="numeric"
-            maxLength={3}
-            placeholder="123"
-            value={card?.cvc}
-            onChange={handleCVC}
-            className="w-30"
-          />
-        </FormFieldControl>
+        <CardCVCInput />
 
-        <FormFieldControl>
-          <FormFieldControl.Label>카드 비밀번호</FormFieldControl.Label>
-          <Box display="flex" className="gap-x-5" onChange={handlePassword}>
-            <TextField
-              type="password"
-              inputMode="numeric"
-              maxLength={1}
-              data-id="1"
-              value={card?.password?.[0] || ''}
-              onChange={handlePassword}
-              className="w-10 text-center"
-            />
-            <TextField
-              type="password"
-              inputMode="numeric"
-              maxLength={1}
-              data-id="2"
-              value={card?.password?.[1] || ''}
-              onChange={handlePassword}
-              className="w-10 text-center"
-            />
-            <TextField
-              type="password"
-              inputMode="numeric"
-              maxLength={1}
-              data-id="3"
-              value={card?.password?.[2] || ''}
-              onChange={handlePassword}
-              className="w-10 text-center"
-            />
-            <TextField
-              type="password"
-              inputMode="numeric"
-              maxLength={1}
-              data-id="4"
-              value={card?.password?.[3] || ''}
-              onChange={handlePassword}
-              className="w-10 text-center"
-            />
-          </Box>
-        </FormFieldControl>
+        <CardPasswordInput />
 
         <Box display="flex" justifyContent="flex-end">
           <Button type="submit" color="brand02" disabled={!isSubmitEnabled}>

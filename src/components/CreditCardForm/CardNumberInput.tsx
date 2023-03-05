@@ -9,15 +9,15 @@ const isInvalidCardLength = (number: string) => {
 };
 
 const CardNumberInput = () => {
-  const numberRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handleNumber = () => {
-    if (!numberRef.current) return;
-    const { value } = numberRef.current;
+    if (!inputRef.current) return;
+    const { value } = inputRef.current;
     const formattedValue = formatCardNumber(value);
 
-    numberRef.current.value = formattedValue;
+    inputRef.current.value = formattedValue;
     setIsInvalid(isInvalidCardLength(formattedValue));
   };
 
@@ -29,7 +29,7 @@ const CardNumberInput = () => {
         type="text"
         inputMode="numeric"
         maxLength={19}
-        ref={numberRef}
+        ref={inputRef}
         onChange={handleNumber}
         validationStatus={isInvalid ? 'error' : 'success'}
         className="w-100"
