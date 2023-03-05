@@ -1,7 +1,7 @@
 import * as Styled from './CreditCard.styles';
 import type { CreditCardProps } from './CreditCard.types';
 
-import { maskLastEight } from 'utils/format';
+import { maskLastEight } from 'utils/inputFormat';
 import { findCardDefaultName } from 'utils/findCardDefaultName';
 
 const CreditCard = ({

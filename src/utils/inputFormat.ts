@@ -1,3 +1,5 @@
+export const formatNumber = (input: string) => input.replace(/[^0-9]/g, '');
+
 export const formatCardNumber = (input: string) => {
   const regex = /[^0-9]/g;
   const cleanInput = input.replace(regex, '');

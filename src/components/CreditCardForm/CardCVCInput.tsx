@@ -3,8 +3,18 @@ import { TextField, FormFieldControl } from 'components/@common';
 
 import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
 
+import { formatNumber } from 'utils/inputFormat';
+import { validateCVC } from 'utils/inputValidation';
+
+import useInput from 'hooks/useInput';
+
 const CardCVCInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { value, error, isInvalid, handle } = useInput(
+    '',
+    validateCVC,
+    formatNumber
+  );
 
   const handleCVC = () => {
     if (!inputRef.current) return;
@@ -29,11 +39,17 @@ const CardCVCInput = () => {
       <TextField
         type="password"
         inputMode="numeric"
-        maxLength={3}
         placeholder="123"
-        onChange={handleCVC}
+        value={value}
+        onChange={handle}
+        validationStatus={isInvalid ? 'error' : 'success'}
         className="w-30"
       />
+      {isInvalid && (
+        <FormFieldControl.Description isError>
+          {error}
+        </FormFieldControl.Description>
+      )}
     </FormFieldControl>
   );
 };

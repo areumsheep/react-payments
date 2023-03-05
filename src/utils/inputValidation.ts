@@ -32,3 +32,10 @@ export const validateExpiration = (target: string) => {
     '만료 일자는 MM/YY 형태로 4자 모두 입력되어야 합니다.'
   )(target);
 };
+
+export const validateCVC = (target: string) => {
+  return validate(
+    [maxLength(3)],
+    '보안 코드는 3자 모두 입력되어야 합니다.'
+  )(target);
+};

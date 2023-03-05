@@ -1,5 +1,5 @@
 import { TextField, FormFieldControl } from 'components/@common';
-import { formatMMYY } from 'utils/format';
+import { formatMMYY } from 'utils/inputFormat';
 import { validateExpiration } from 'utils/inputValidation';
 
 import useInput from 'hooks/useInput';

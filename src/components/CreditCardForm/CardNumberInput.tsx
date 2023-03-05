@@ -1,5 +1,5 @@
 import { TextField, FormFieldControl } from 'components/@common';
-import { formatCardNumber } from 'utils/format';
+import { formatCardNumber } from 'utils/inputFormat';
 import { validateCardNumber } from 'utils/inputValidation';
 
 import useInput from 'hooks/useInput';
