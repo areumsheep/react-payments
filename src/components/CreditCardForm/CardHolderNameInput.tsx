@@ -2,12 +2,10 @@ import { useRef, useState } from 'react';
 import { Box, TextField, FormFieldControl } from 'components/@common';
 
 const CardHolderNameInput = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
   const [holderName, setHolderName] = useState('');
 
-  const handleHolderName = () => {
-    if (!inputRef.current) return;
-    const { value } = inputRef.current;
+  const handleHolderName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
     setHolderName(value);
   };
 
@@ -20,7 +18,6 @@ const CardHolderNameInput = () => {
       <TextField
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         maxLength={30}
-        ref={inputRef}
         onChange={handleHolderName}
         className="w-100"
       />
