@@ -2,29 +2,17 @@ import React, { useContext, useRef } from 'react';
 import styled from '@emotion/styled';
 
 import { Box, Button, FormFieldControl, TextField } from 'components/@common';
-import type { PartialCreditCardWithId } from 'types/CreditCard';
+import type { PartialCreditCardType } from 'types/CreditCard';
 import { CardListContext } from 'contexts/CardListProvider';
-import { ModalContext } from 'components/@common/Modal/ModalProvider';
 
-const CardDetail = ({
-  card: { id, nickname },
-}: {
-  card: PartialCreditCardWithId;
-}) => {
+const CardDetail = ({ card }: { card: PartialCreditCardType }) => {
   const nicknameRef = useRef<HTMLInputElement>(null);
-  const { setToggleClose } = useContext(ModalContext);
   const { removeCardInfo, updateCardNickname } = useContext(CardListContext);
 
-  const removeCard = () => {
-    removeCardInfo(id);
-    setToggleClose();
-  };
-
-  const updateCardNickName = () => {
+  const handleCardNickname = () => {
     if (!nicknameRef.current) return;
     const { value } = nicknameRef.current;
-    updateCardNickname(id, value);
-    setToggleClose();
+    updateCardNickname(card.id!, value);
   };
 
   return (
@@ -36,7 +24,7 @@ const CardDetail = ({
             type="text"
             ref={nicknameRef}
             maxLength={10}
-            defaultValue={nickname}
+            defaultValue={card.nickname}
             className="w-100"
           />
         </FormFieldControl>
@@ -45,12 +33,12 @@ const CardDetail = ({
           <Button
             type="submit"
             color="red07"
-            onClick={removeCard}
+            onClick={() => removeCardInfo(card.id!)}
             className="w-47"
           >
             삭제하기
           </Button>
-          <Button type="submit" onClick={updateCardNickName} className="w-47">
+          <Button type="submit" onClick={handleCardNickname} className="w-47">
             수정하기
           </Button>
         </Box>

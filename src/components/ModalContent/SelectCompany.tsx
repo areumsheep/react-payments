@@ -4,12 +4,12 @@ import styled from '@emotion/styled';
 import { CardCompanies } from 'constants/Card';
 
 import type { ThemeKeys } from 'styles/theme';
-import { Box } from 'components/@common';
+import { Box } from '../@common';
 
-import type { PartialCreditCardWithoutId } from 'types/CreditCard';
+import type { PartialCreditCardType } from 'types/CreditCard';
 
 interface Props {
-  onClick: (data: PartialCreditCardWithoutId) => void;
+  onClick: (data: PartialCreditCardType) => void;
 }
 
 const SelectCompany = ({ onClick }: Props) => {
