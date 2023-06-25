@@ -12,18 +12,20 @@ const Modal = ({ children }: PropsWithChildren<ModalProps>) => {
 };
 
 Modal.Trigger = ({ children }: PropsWithChildren) => {
-  const { open } = useContext(ModalContext);
+  const { setToggleOpen } = useContext(ModalContext);
 
   return (
-    <Styled.TriggerWrapper onClick={open}>{children}</Styled.TriggerWrapper>
+    <Styled.TriggerWrapper onClick={setToggleOpen}>
+      {children}
+    </Styled.TriggerWrapper>
   );
 };
 
 Modal.Content = ({ children }: PropsWithChildren) => {
-  const { isOpened, close } = useContext(ModalContext);
+  const { isOpened, setToggleClose } = useContext(ModalContext);
 
   const onCloseWithoutPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
-    close();
+    setToggleClose();
     e.stopPropagation();
   };
 

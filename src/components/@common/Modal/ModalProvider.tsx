@@ -3,16 +3,16 @@ import useToggle from 'hooks/useToggle';
 
 export const ModalContext = createContext({
   isOpened: false,
-  open: () => {},
-  close: () => {},
+  setToggleOpen: () => {},
+  setToggleClose: () => {},
 });
 ModalContext.displayName = 'ModalContext';
 
 const ModalProvider = ({ children }: PropsWithChildren) => {
-  const { isOpened, open, close } = useToggle();
+  const { isOpened, setToggleOpen, setToggleClose } = useToggle();
 
   return (
-    <ModalContext.Provider value={{ isOpened, open, close }}>
+    <ModalContext.Provider value={{ isOpened, setToggleOpen, setToggleClose }}>
       {children}
     </ModalContext.Provider>
   );

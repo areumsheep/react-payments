@@ -3,18 +3,18 @@ import { useState } from 'react';
 const useToggle = () => {
   const [isOpened, setIsOpened] = useState(false);
 
-  const open = () => {
+  const setToggleOpen = () => {
     setIsOpened(true);
   };
-  const close = () => {
+  const setToggleClose = () => {
     setIsOpened(false);
   };
 
   return {
     isOpened,
     //
-    open,
-    close,
+    setToggleOpen,
+    setToggleClose,
   };
 };
 

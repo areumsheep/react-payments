@@ -8,10 +8,14 @@ import * as Styled from './Tooltip.styled';
 
 const Tooltip = ({ children, content }: TooltipProps) => {
   const id = useId();
-  const { isOpened, open, close } = useToggle();
+  const { isOpened, setToggleOpen, setToggleClose } = useToggle();
 
   return (
-    <Styled.Tooltip id={id} onMouseOver={open} onMouseLeave={close}>
+    <Styled.Tooltip
+      id={id}
+      onMouseOver={setToggleOpen}
+      onMouseLeave={setToggleClose}
+    >
       {children}
 
       {isOpened && (
