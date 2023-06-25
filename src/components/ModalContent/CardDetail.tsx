@@ -10,9 +10,9 @@ const CardDetail = ({ card }: { card: PartialCreditCardType }) => {
   const { removeCardInfo, updateCardNickname } = useContext(CardListContext);
 
   const handleCardNickname = () => {
-    if (!nicknameRef.current) return;
+    if (!nicknameRef.current || !card.id) return;
     const { value } = nicknameRef.current;
-    updateCardNickname(card.id!, value);
+    updateCardNickname(card.id, value);
   };
 
   return (
