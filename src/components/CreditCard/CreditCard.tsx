@@ -5,16 +5,16 @@ import { maskLastEight } from 'utils/format';
 import { findCardDefaultName } from 'utils/findCardDefaultName';
 
 const CreditCard = ({
-  color,
+  color = 'brand01',
   nickname,
   number,
   holderName,
   expiration,
 }: CreditCardProps) => {
   return (
-    <Styled.Wrapper color={color!}>
+    <Styled.Wrapper color={color}>
       <Styled.SmallText>
-        {nickname || findCardDefaultName(color!)}
+        {nickname || findCardDefaultName(color)}
       </Styled.SmallText>
       <Styled.CardChip />
       <Styled.NumberText>{maskLastEight(number)}</Styled.NumberText>
