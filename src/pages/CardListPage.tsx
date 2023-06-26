@@ -29,9 +29,9 @@ const CardListPage = () => {
         <Modal>
           <Modal.Trigger>
             {cardList &&
-              cardList.map((card, index) => (
+              cardList.map((card) => (
                 <Container
-                  key={index}
+                  key={card.id}
                   className="w-100"
                   onClick={() => setSelectedCard(card)}
                 >
