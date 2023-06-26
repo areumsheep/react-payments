@@ -2,17 +2,21 @@ import React, { useContext, useRef } from 'react';
 import styled from '@emotion/styled';
 
 import { Box, Button, FormFieldControl, TextField } from 'components/@common';
-import type { PartialCreditCardType } from 'types/CreditCard';
+import type { PartialCreditCardWithId } from 'types/CreditCard';
 import { CardListContext } from 'contexts/CardListProvider';
 
-const CardDetail = ({ card }: { card: PartialCreditCardType }) => {
+const CardDetail = ({
+  card: { id, nickname },
+}: {
+  card: PartialCreditCardWithId;
+}) => {
   const nicknameRef = useRef<HTMLInputElement>(null);
   const { removeCardInfo, updateCardNickname } = useContext(CardListContext);
 
   const handleCardNickname = () => {
     if (!nicknameRef.current) return;
     const { value } = nicknameRef.current;
-    updateCardNickname(card.id!, value);
+    updateCardNickname(id, value);
   };
 
   return (
@@ -24,7 +28,7 @@ const CardDetail = ({ card }: { card: PartialCreditCardType }) => {
             type="text"
             ref={nicknameRef}
             maxLength={10}
-            defaultValue={card.nickname}
+            defaultValue={nickname}
             className="w-100"
           />
         </FormFieldControl>
@@ -33,7 +37,7 @@ const CardDetail = ({ card }: { card: PartialCreditCardType }) => {
           <Button
             type="submit"
             color="red07"
-            onClick={() => removeCardInfo(card.id!)}
+            onClick={() => removeCardInfo(id)}
             className="w-47"
           >
             삭제하기

@@ -7,12 +7,12 @@ import { ReactComponent as PlusIcon } from 'assets/PlusIcon.svg';
 import { CardListContext } from 'contexts/CardListProvider';
 
 import { CardDetail, CreditCard } from 'components';
-import { PartialCreditCardType } from 'types/CreditCard';
+import { PartialCreditCardWithId } from 'types/CreditCard';
 
 const CardListPage = () => {
   const { push } = useRouter();
   const { cardList } = useContext(CardListContext);
-  const [selectedCard, setSelectedCard] = useState<PartialCreditCardType>();
+  const [selectedCard, setSelectedCard] = useState<PartialCreditCardWithId>();
 
   return (
     <>
