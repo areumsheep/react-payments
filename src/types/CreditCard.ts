@@ -11,4 +11,7 @@ export interface CreditCardType {
   password: string[];
 }
 
-export type PartialCreditCardType = Partial<CreditCardType>;
+export type PartialCreditCardWithId = Partial<CreditCardType> &
+  Pick<CreditCardType, 'id'>;
+
+export type PartialCreditCardWithoutId = Omit<PartialCreditCardWithId, 'id'>;

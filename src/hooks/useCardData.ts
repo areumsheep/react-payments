@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 import { CardCompanies, DEFAULT_CARD_COMPANY } from 'constants/Card';
-import type { CreditCardType, PartialCreditCardType } from 'types/CreditCard';
+import type {
+  CreditCardType,
+  PartialCreditCardWithoutId,
+} from 'types/CreditCard';
 
 const initalData: CreditCardType = {
   id: 1,
@@ -17,7 +20,7 @@ const initalData: CreditCardType = {
 const useCardData = () => {
   const [card, setCard] = useState<CreditCardType>(initalData);
 
-  const changeCardInfo = (data: PartialCreditCardType) => {
+  const changeCardInfo = (data: PartialCreditCardWithoutId) => {
     setCard((prev) => ({ ...prev, ...data }));
   };
 

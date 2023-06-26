@@ -1,9 +1,12 @@
 import { createContext, PropsWithChildren, useRef, useState } from 'react';
-import type { PartialCreditCardType } from 'types/CreditCard';
+import type {
+  PartialCreditCardWithId,
+  PartialCreditCardWithoutId,
+} from 'types/CreditCard';
 
 export const CardListContext = createContext({
-  cardList: [] as PartialCreditCardType[],
-  addCardInfo: (data: PartialCreditCardType) => {},
+  cardList: [] as PartialCreditCardWithId[],
+  addCardInfo: (data: PartialCreditCardWithoutId) => {},
   removeCardInfo: (selectId: number) => {},
   updateCardNickname: (selectId: number, value: string) => {},
 });
@@ -11,11 +14,11 @@ CardListContext.displayName = 'CardListContext';
 
 const CardListProvider = ({ children }: PropsWithChildren) => {
   const id = useRef(1);
-  const [cardList, setCardList] = useState<PartialCreditCardType[]>([]);
+  const [cardList, setCardList] = useState<PartialCreditCardWithId[]>([]);
 
-  const addCardInfo = (data: PartialCreditCardType) => {
-    data['id'] = id.current;
-    setCardList((prev) => [...prev, data]);
+  const addCardInfo = (data: PartialCreditCardWithoutId) => {
+    const result: PartialCreditCardWithId = { ...data, id: id.current };
+    setCardList((prev) => [...prev, result]);
     id.current += 1;
   };
 
